@@ -1,9 +1,11 @@
 <!-- Components info: https://webdev.dartlang.org/components -->
 <div>
-  <material-input label="What do you need to do?" autoFocus floatingLabel style="width:80%" [(ngModel)]="newTodo" (keyup.enter)="add()">
+  <material-input label="Title of item" autoFocus floatingLabel style="width:80%" [(ngModel)]="title" (keyup.enter)="add()">
+  </material-input>
+  <material-input label="Description of item" autoFocus floatingLabel style="width:80%" [(ngModel)]="description" (keyup.enter)="add()">
   </material-input>
 
-  <material-fab mini raised (trigger)="add()" [disabled]="newTodo.isEmpty">
+  <material-fab mini raised (trigger)="add()" [disabled]="title.isEmpty || description.isEmpty">
     <material-icon icon="add"></material-icon>
   </material-fab>
 </div>
@@ -18,7 +20,7 @@
     <li *ngFor="let item of items; let i=index">
       <material-checkbox #done materialTooltip="Mark item as done">
       </material-checkbox>
-      <span [class.done]="done.checked">{{item}}</span>
+      <span [class.done]="done.checked">{{item.title}} / {{item.description}}</span>
       <material-fab mini (trigger)="remove(i)">
         <material-icon icon="delete"></material-icon>
       </material-fab>
@@ -30,7 +32,7 @@
   <h1>Trashcan</h1>
   <ul>
     <li *ngFor="let item of trashcan; let i=index">
-      {{item}}
+      {{item.title}}/{{item.description}}
       <material-fab mini (trigger)="removePermanent(i)">
         <material-icon icon="delete"></material-icon>
       </material-fab>
